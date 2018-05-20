@@ -40,11 +40,12 @@ class Welcome extends CI_Controller {
  * @param none
  * @return none
  * @todo none
+ *get_gigs
  */
 	public function index()
 	{
 		$this->load->model('gig_model');
-		$data['gigs'] = $this->gig_model->get_gigs();
+		$data['gigs'] = $this->gig_model->getGigs();
         $data['title'] = 'Gig Central';
 		$data['api'] = $this->config->item('googleMapsKey');
 		$this->load->view('welcome_page', $data);
