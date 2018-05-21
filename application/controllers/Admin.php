@@ -39,7 +39,7 @@ class Admin extends CI_Controller {
             if ($this->session->logged_in == TRUE){
                 $logged = 'You have Loggedin GigCentral Website!';
             }else{
-                $logged = 'You have Logout!';
+                $logged = 'You have Logged out!';
             }
 //            if (isset($this->session->first_name)){
 //                $data['first_name'] = $this->session->first_name;   
