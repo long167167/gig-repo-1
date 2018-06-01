@@ -25,6 +25,7 @@ application/config/custom_config.php
 .Trashes
 ehthumbs.db
 Thumbs.db
+.vscode
 
 # Packages #
 ############
