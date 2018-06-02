@@ -95,70 +95,37 @@ $this->load->view($this->config->item('theme') . 'header');
 <!--begin Javascript-->
 <script>
 
-	//pulled from:	//https://developers.google.com/maps/documentation/javascript/mysql-to-maps
-    function initMap(){
-    var map = new google.maps.Map(document.getElementById("map"), {
-    center: new google.maps.LatLng(47.6145, -122.3418),
-    //center: new google.maps.LatLng(lat, lng),
-    zoom: 13
-    }); 
-    var infoWindow = new google.maps.InfoWindow;
-  //base path
-	var base_url = "<?php echo base_url()?>";
-	var ajax = "public/phpsqlajax_genxml.php";
-	var url = base_url.concat(ajax);
-  downloadUrl(url , function(data) {
-    var xml = data.responseXML;
-    var markers = xml.documentElement.getElementsByTagName("marker");
-    Array.prototype.forEach.call(markers, function(markerElem) {
-         var name = 			markerElem.getAttribute('name');
-         var address = markerElem.getAttribute('address');
-         var type = markerElem.getAttribute('type');    
-	    var point = new google.maps.LatLng(
-                  parseFloat(markerElem.getAttribute('lat')),
-                  parseFloat(markerElem.getAttribute('lng')));
-	    
-	    var infowincontent = document.createElement('div');
-         var strong = document.createElement('strong');
-              strong.textContent = name
-              infowincontent.appendChild(strong);
-              infowincontent.appendChild(document.createElement('br'));
+ var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 47.6145, lng: -122.3418},
+          zoom: 13
+        });
+        infoWindow = new google.maps.InfoWindow;
 
-         var text = document.createElement('text');
-              text.textContent = address
-              infowincontent.appendChild(text);
-	    
-	    var icon = {};
-              var marker = new google.maps.Marker({
-                map: map,
-                position: point,
-                label: icon.icon
-              });
-	   
-	marker.addListener(marker, 'click', function() {
-    infoWindow.setContent(infowincontent);
-    infoWindow.open(map, marker);
-  });
-});
-  });
-}
-	
-function downloadUrl(url, callback) {
-  var request = window.ActiveXObject ?
-      new ActiveXObject('Microsoft.XMLHTTP') :
-      new XMLHttpRequest;
-  request.onreadystatechange = function() {
-    if (request.readyState == 4) {
-      request.onreadystatechange = doNothing;
-      callback(request, request.status);
-    }
-  };
-  request.open('GET', url, true);
-  request.send(null);
-}
-    
-function doNothing() {}
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+              
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Your Location.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
 
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      }
 </script>
 
 <!--api below, after "key=" is from google on 2017/05/09. Limited use.-->
