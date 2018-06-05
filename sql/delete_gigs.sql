@@ -50,14 +50,17 @@ mysql> SHOW EVENTS FROM gig_central;
 
 */
 
+
 CREATE EVENT IF NOT EXISTS `Delete_Expired_Gigs` 
     ON SCHEDULE 
         EVERY 1 DAY STARTS CURRENT_TIMESTAMP 
     COMMENT 
         'Deletes gigs that have not been updated in the past 30 days' 
     DO 
-        DELETE FROM Gigs 
-        WHERE LastUpdated < (NOW() - INTERVAL 30 DAY);
+        -- if GigCloseDate has a value, use that
+        DELETE FROM Gigs
+        WHERE (GigCloseDate > 0 AND GigCloseDate < (CURDATE() - INTERVAL 30 DAY))
+        OR LastUpdated < (NOW() - INTERVAL 60 DAY);
 
 /* 
 If you want to remove the event, use:
