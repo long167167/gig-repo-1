@@ -2,7 +2,7 @@
 /**
 * add.php view page for generic Venue controller
 *
-* views/venues/add.php
+* application/views/venues/add.php
 *
 * @package ITC 260 Gig Central CodeIgnitor
 * @subpackage Venues
@@ -14,7 +14,8 @@
 * @todo none
 */
 
-$this->load->view($this->config->item('theme').'header');
+//$this->load->view($this->config->item('theme').'header');
+$this->load->view($this->config->item('theme') . 'headerjqueryui'); 
 $attributes = array('class'=>'form-horizontal', 'role'=>'form');
 ?>
 
@@ -57,7 +58,65 @@ $attributes = array('class'=>'form-horizontal', 'role'=>'form');
                 <label for="State" class="col-lg-3 control-label"><em>State</em></label>
                     <div class="col-md-6">
                         <?php echo form_error('State'); ?>
-                        <input type="text" class="form-control" id="State" name="State" placeholder="State" value="<?php echo set_value('State'); ?>">
+<!--                        <input type="text" class="form-control" id="State" name="State" placeholder="State" value="<?php //echo set_value('State'); ?>">-->
+                    
+                    <select class="form-control" id="State" name="State">                        
+                        <option value="">Select State</option>
+                        <option value="<?php echo set_value('State'); ?>AK">Alaska</option>
+                        <option value="<?php echo set_value('State'); ?>AL">Alabama</option>
+                        <option value="<?php echo set_value('State'); ?>AR">Arkansas</option>
+                        <option value="<?php echo set_value('State'); ?>AZ">Arizona</option>
+                        <option value="<?php echo set_value('State'); ?>CA">California</option>
+                        <option value="<?php echo set_value('State'); ?>CO">Colorado</option>
+                        <option value="<?php echo set_value('State'); ?>CT">Connecticut</option>
+                        <option value="<?php echo set_value('State'); ?>DC">District of Columbia</option>
+                        <option value="<?php echo set_value('State'); ?>DE">Delaware</option>
+                        <option value="<?php echo set_value('State'); ?>FL">Florida</option>
+                        <option value="<?php echo set_value('State'); ?>GA">Georgia</option>
+                        <option value="<?php echo set_value('State'); ?>HI">Hawaii</option>
+                        <option value="<?php echo set_value('State'); ?>IA">Iowa</option>
+                        <option value="<?php echo set_value('State'); ?>ID">Idaho</option>
+                        <option value="<?php echo set_value('State'); ?>IL">Illinois</option>
+                        <option value="<?php echo set_value('State'); ?>IN">Indiana</option>
+                        <option value="<?php echo set_value('State'); ?>KS">Kansas</option>
+                        <option value="<?php echo set_value('State'); ?>KY">Kentucky</option>
+                        <option value="<?php echo set_value('State'); ?>LA">Louisiana</option>
+                        <option value="<?php echo set_value('State'); ?>MA">Massachusetts</option>
+                        <option value="<?php echo set_value('State'); ?>MD">Maryland</option>
+                        <option value="<?php echo set_value('State'); ?>ME">Maine</option>
+                        <option value="<?php echo set_value('State'); ?>MI">Michigan</option>
+                        <option value="<?php echo set_value('State'); ?>MN">Minnesota</option>
+                        <option value="<?php echo set_value('State'); ?>MO">Missouri</option>
+                        <option value="<?php echo set_value('State'); ?>MS">Mississippi</option>
+                        <option value="<?php echo set_value('State'); ?>MT">Montana</option>
+                        <option value="<?php echo set_value('State'); ?>NC">North Carolina</option>
+                        <option value="<?php echo set_value('State'); ?>ND">North Dakota</option>
+                        <option value="<?php echo set_value('State'); ?>NE">Nebraska</option>
+                        <option value="<?php echo set_value('State'); ?>NH">New Hampshire</option>
+                        <option value="<?php echo set_value('State'); ?>NJ">New Jersey</option>
+                        <option value="<?php echo set_value('State'); ?>NM">New Mexico</option>
+                        <option value="<?php echo set_value('State'); ?>NV">Nevada</option>
+                        <option value="<?php echo set_value('State'); ?>NY">New York</option>
+                        <option value="<?php echo set_value('State'); ?>OH">Ohio</option>
+                        <option value="<?php echo set_value('State'); ?>OK">Oklahoma</option>
+                        <option value="<?php echo set_value('State'); ?>OR">Oregon</option>
+                        <option value="<?php echo set_value('State'); ?>PA">Pennsylvania</option>
+                        <option value="<?php echo set_value('State'); ?>PR">Puerto Rico</option>
+                        <option value="<?php echo set_value('State'); ?>RI">Rhode Island</option>
+                        <option value="<?php echo set_value('State'); ?>SC">South Carolina</option>
+                        <option value="<?php echo set_value('State'); ?>SD">South Dakota</option>
+                        <option value="<?php echo set_value('State'); ?>TN">Tennessee</option>
+                        <option value="<?php echo set_value('State'); ?>TX">Texas</option>
+                        <option value="<?php echo set_value('State'); ?>UT">Utah</option>
+                        <option value="<?php echo set_value('State'); ?>VA">Virginia</option>
+                        <option value="<?php echo set_value('State'); ?>VT">Vermont</option>
+                        <option value="<?php echo set_value('State'); ?>WA">Washington</option>
+                        <option value="<?php echo set_value('State'); ?>WI">Wisconsin</option>
+                        <option value="<?php echo set_value('State'); ?>WV">West Virginia</option> 
+                        <option value="<?php echo set_value('State'); ?>WY">Wyoming</option>
+                        
+                        </select>
+                        
                     </div>
             </div>
             <div class="form-group">
@@ -81,7 +140,7 @@ $attributes = array('class'=>'form-horizontal', 'role'=>'form');
                     </div>
             </div>
            <div class="form-group">
-            <label for="VenueHours" class="col-lg-3 control-label"><em>Hours</em></label><br>
+            <label for="VenueHours" class="col-lg-3 control-label"><em>Hours</em></label>
                 <div class="col-md-6">
                   <input type="text" class="form-control" id="VenueHours" name="VenueHours" placeholder="Venue Hours" value="<?php echo set_value('VenueHours'); ?>">
                 </div>
@@ -106,9 +165,13 @@ $attributes = array('class'=>'form-horizontal', 'role'=>'form');
                 </div>
            </div>-->
            <div class="form-group">
-            <label for="VenueExpirationDate" class="col-lg-3 control-label"><em>Venue Expiration Date</em></label><br>
+            <label for="VenueExpirationDate" class="col-lg-3 control-label"><em>Venue Expiration Date</em></label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" id="VenueExpirationDate" name="VenueExpirationDate" placeholder="Venue Expiration Date" value="<?php echo set_value('VenueExpirationDate'); ?>">
+                  <?php $attrib = 'id="VenueExpirationDate" placeholder="Venue Expiration Date"';  
+                    echo form_input('VenueExpirationDate', set_value('VenueExpirationDate'), $attrib); ?>   
+                    
+                    
+<!--                  <input type="text" class="form-control" id="VenueExpirationDate" name="VenueExpirationDate" placeholder="Venue Expiration Date" value="<?php echo set_value('VenueExpirationDate'); ?>">-->
                 </div>
            </div>        
         </fieldset>
@@ -204,5 +267,4 @@ $attributes = array('class'=>'form-horizontal', 'role'=>'form');
     </div>
 </div>
 
-
-<?php $this->load->view($this->config->item('theme').'footer'); ?>
+<?php $this->load->view($this->config->item('theme') . 'footerjqueryui'); //$this->load->view($this->config->item('theme').'footer'); ?> 
