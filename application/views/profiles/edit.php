@@ -3,7 +3,7 @@
 * edit.php view page for generic profile controller
 *
 *
-*view/profiles/edit.php
+*application/views/profiles/edit.php
 *
 * @package itc260-sp15-gig-central
 * @subpackage application/views/profiles
@@ -55,13 +55,24 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         </div>
         
         <div class="form-group">
-            <label for="i_am_a" class="col-lg-3 control-label">I am <span class="required">*</span></label>
+            <label for="i_am_a" class="col-lg-3 control-label">I am an <span class="required">*</span></label>
             <?php echo form_error('i_am_a'); ?>
           <div class="col-lg-6">
             <select name="i_am_a" id="i_am_a" class="form-control">
+               <?php if($i_am == 'employee') { ?>
+                <option value="<?=$i_am?>"><?=ucwords($i_am)?></option>
+                <option value="employer">Employer</option>
+                <?php } else { ?>
+                <option value="<?=$i_am?>"><?=ucwords($i_am)?></option>
+                <option value="employee">Employee</option>
+                <?php } ?>
+                
+<!--
+                testing #96
               <option value="employee"><?=$i_am?></option> 
               <option value="employee">Employee</option>
               <option value="employer">Employer</option>
+-->
             </select>
           </div>
         </div>
@@ -125,7 +136,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         </div>
         -->
         <div class="form-group">
-          <label for="languages" class="col-lg-3 control-label">Bio<span class="required">*</span></label>
+          <label for="languages" class="col-lg-3 control-label">Bio <span class="required">*</span></label>
           <div class="col-lg-3">
             <?php echo form_textarea( array( 'name' => 'bio', 'rows' => '5', 'cols' => '53', 'value' => $bio ) )?>
           </div>
