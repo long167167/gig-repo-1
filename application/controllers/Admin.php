@@ -35,33 +35,36 @@ class Admin extends CI_Controller {
              $this->config->set_item('nav-active', 'Login');//sets active class on current nav item   
         }#end constructor
         
+               
         public function index(){
             $data['title'] ="Admin dashboard";
+            $timeStampValue = ""; # take timestamp value
             if ($this->session->logged_in == TRUE){
                 $logged = 'You have Loggedin GigCentral Website!';
             }else{
                 $logged = 'You have Logged out!';
             }
-//            if (isset($this->session->first_name)){
-//                $data['first_name'] = $this->session->first_name;   
-//            }else{
-//                $data['first_name'] = "";
-//            }
+
             if (isset($this->session->email)){
                 $data['email'] = $this->session->email;
                 $data['first_name'] = $this->session->first_name;
                 $data['last_name'] = $this->session->last_name;
                 $data['picture'] = $this->session->picture;
+                $data['Lastlogin'] = $this->session->Lastlogin;
+                $data['Lastlogout'] = $this->session->Lastlogout;
                 }else{
                 $data['email'] = "";
                 $data['first_name'] = "";
                 $data['last_name'] = "";
                 $data['picture'] = "";
+                $data['Lastlogin'] = "";
+                $data['Lastlogout'] = "";
                 }
             
             $data['logged'] = $logged;
             $this->load->view('admins/index',$data);
         }
+    
         public function login()
         {
             
