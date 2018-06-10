@@ -1,6 +1,6 @@
 <?php
 /**
-* add.php is the add gigs page for Gigs controller
+* application/views/gigs/add.php is the add gigs page for Gigs controller
 *
 * views/gigs/add.php
 *
@@ -215,7 +215,7 @@
         <br>
         <br>
                  <fieldset>
-                <legend><h3><strong>Gig Description</strong></h3></legend>
+                <legend><h3><strong>Description</strong></h3></legend>
             <div class="form-group">
                 <label for="GigOutline" class="col-lg-3 control-label hidden-label"><em>Gig Outline</em></label>
                     <div class="col-md-6">
