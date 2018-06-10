@@ -1,6 +1,6 @@
 <?php
 /**
-* index.php view page for generic profile_form controller
+* application/views/profiles/add.php view page for generic profile_form controller
 *
 *
 *view/profile_form/index.php
@@ -65,7 +65,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         
         <div class="form-group">
             <?php echo form_error('i_am_a'); ?>
-            <label for="i_am_a" class="col-lg-3 control-label">I am</label>
+            <label for="i_am_a" class="col-lg-3 control-label">I am an *</label>
           <div class="col-lg-6">
             <select name="i_am_a" id="i_am_a" class="form-control">
               <option value="employee">Employee</option>
@@ -75,7 +75,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         </div>
 
         <div class="form-group">
-          <label for="first_name" class="col-lg-3 control-label">First Name</label>
+          <label for="first_name" class="col-lg-3 control-label">First Name *</label>
             
           <div class="col-lg-6">
             <?php echo form_error('first_name'); ?>
@@ -84,7 +84,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         </div>
 
         <div class="form-group">
-          <label for="last_name" class="col-lg-3 control-label">Last Name</label>
+          <label for="last_name" class="col-lg-3 control-label">Last Name *</label>
             
           <div class="col-lg-6">
             <?php echo form_error('last_name'); ?>
@@ -94,7 +94,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         </div>
 
         <div class="form-group">
-          <label for="email" class="col-lg-3 control-label">Email</label>
+          <label for="email" class="col-lg-3 control-label">Email *</label>
             
           <div class="col-lg-6">
             <?php echo form_error('email'); ?>
@@ -103,7 +103,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
           
         </div>
         <div class="form-group">
-          <label for="password" class="col-lg-3 control-label">Password</label>
+          <label for="password" class="col-lg-3 control-label">Password *</label>
             
           <div class="col-lg-6">
             <?php echo form_error('password'); ?>
@@ -114,7 +114,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         </div>
         
         <div class="form-group">
-          <label for="re_password" class="col-lg-3 control-label">Retype Password</label>
+          <label for="re_password" class="col-lg-3 control-label">Retype Password *</label>
           <div class="col-lg-6">
             <?php echo form_error('re_password'); ?>
             <input id="re_password" class="form-control" type="password" name="re_password">
@@ -125,7 +125,7 @@ $this->load->view($this->config->item('theme') . 'header'); //Loads Bootswatch t
         </div>
         
         <div class="form-group">
-          <label for="languages" class="col-lg-3 control-label">Bio</label>
+          <label for="languages" class="col-lg-3 control-label">Bio *</label>
           <div class="col-lg-3">
             <?php echo form_error('bio'); ?>
             <?php echo form_textarea( array( 'name' => 'bio', 'rows' => '5', 'cols' => '53', 'value' => set_value('bio') ) )?>
