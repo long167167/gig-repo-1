@@ -1,8 +1,8 @@
 <?php
 /**
-* add.php view page for generic Venue controller
+* application/views/venues/add.php view page for generic Venue controller
 *
-* application/views/venues/add.php
+* views/venues/add.php
 *
 * @package ITC 260 Gig Central CodeIgnitor
 * @subpackage Venues
@@ -14,8 +14,9 @@
 * @todo none
 */
 
-//$this->load->view($this->config->item('theme').'header');
+//
 $this->load->view($this->config->item('theme') . 'headerjqueryui'); 
+$this->load->view($this->config->item('theme').'header');
 $attributes = array('class'=>'form-horizontal', 'role'=>'form');
 ?>
 
