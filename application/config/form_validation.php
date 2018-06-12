@@ -100,6 +100,38 @@ $config = array(
                 'rules' => 'required'
             )
         ),
+        'venues/edit' => array(
+            array(
+                'field' => 'VenueName',
+                'label' => 'Venue Name',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'VenueAddress',
+                'label' => 'Venue Address',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'City',
+                'label' => 'Venue City',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'ZipCode',
+                'label' => 'Venue Zip Code',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'VenuePhone',
+                'label' => 'Venue Phone',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'State',
+                'label' => 'Venue State',
+                'rules' => 'required'
+            )
+        ),
         'profile/add' => array(
             array(
             'field' => 'i_am_a',
@@ -122,23 +154,30 @@ $config = array(
             'rules' => 'trim|required|valid_email|is_unique[Profile.email]',
                 array(
                     'is_unique'     => 'This %s already exists.'
-                )
+                ),
             ),
             array(
-            'field' => 'password',
-            'label' => 'Password',
+                'field' => 'bio',
+                'label' => 'bio',
+                'rules' => 'required'
+                )
+        ),
+        'profile/changePass' => array(
+            array(
+            'field' => 'old_password',
+            'label' => 'Current Password',
+            'rules' => 'required'
+            ),
+            array(
+            'field' => 'new_password',
+            'label' => 'New Password',
             'rules' => 'required'
             ),
             array(
             'field' => 're_password',
             'label' => 'Password confirmation',
-            'rules' => 'required|matches[password]'
+            'rules' => 'required|matches[new_password]'
             ),
-            array(
-            'field' => 'bio',
-            'label' => 'bio',
-            'rules' => 'required'
-            )
         )
 );
 
