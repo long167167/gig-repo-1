@@ -122,11 +122,13 @@ CREATE TABLE `Profile` (
   `first_name` text,
   `last_name` text,
   `email` text,
+    `github` varchar(100) DEFAULT '',
+    `linkedin` varchar(100) DEFAULT '',
   `password` text NOT NULL,
   `picture` varchar(24) DEFAULT NULL,
   `bio` text,
   `subscribed_to_newsletters` tinyint(1) NOT NULL DEFAULT '0',
-  `Lastlogin` DATETIME NOT NULL,
+  `Lastlogin` TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,
    `Lastlogout` TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,6 +1,6 @@
 <?php
 /**
- * models/Profile_model.php
+ * application/models/Profile_model.php
  * model for a generic Profile_List
  * used to interact with database .
  *
@@ -84,7 +84,22 @@ class Profile_model extends CI_Model
         }
         $query = $this->db->get_where('Profile', array('id' => $slug,'subscribed_to_newsletters' => $subscribed));
         return $query->result_array();
-    }    
+    } 
+    
+    /* get_login_histories method for Profile_model class. */
+    public function get_login_histories($slug = FALSE, $Lastlogin = FALSE, $Lastlogout = FALSE)
+    {
+        if ($slug === FALSE)
+        {
+            $query = $this->db->get_where('Profile',array('$Lastlogin'=>$Lastlogin));
+            $query = $this->db->get_where('Profile',array('$Lastlogin'=>$Lastlogout));
+            return $query->result_array();
+        }
+        
+        $query = $this->db->get_where('Profile', array('id' => $slug,'$Lastlogin' => $Lastlogin));
+        $query = $this->db->get_where('Profile', array('id' => $slug,'$Lastlogin' => $Lastlogout));
+        return $query->result_array();
+    }
     /**
 	 * setProfiles method for Profile_model class. 
 	 * getProfiles method for Profile_model class. 
@@ -102,7 +117,10 @@ class Profile_model extends CI_Model
          $data = array(
             'first_name' => $this->input->post('first_name'),
             'id' => $slug,
-            'email' => $this->input->post('email')
+            'email' => $this->input->post('email'),
+             
+            'Lastlogin' => $this->input->post('Lastlogin'),
+            'Lastlogout' => $this->input->post('Lastlogout')
          );
         return $this->db->insert('Profile', $data);
     }//end setProfiles method
@@ -134,14 +152,13 @@ class Profile_model extends CI_Model
 	 * @return void 
 	 * @todo none
 	 */ 
-    function getPass($id,$pass){
+    function verifyPass($pass){
         $query = $this->db->get_where('Profile', array('id'=>$this->session->id));
          $row = $query->row();    
         if (isset($row))
         {
             //if(pass_decrypt($row->password,KEY_ENCRYPT) == $pass)
-            if(password_verify($pass, $row->password))
-            {
+            if(password_verify($pass, $row->password)){
                 return TRUE;
             }
         }
@@ -173,12 +190,36 @@ class Profile_model extends CI_Model
                         'first_name'=> $row->first_name,
                         'last_name'=> $row->last_name,
                         'picture'=> $row->picture, 
-                        'bio'     => $row->bio
+                        'bio'     => $row->bio,
+                        'Lastlogin'=> $row->Lastlogin,
+                        'Lastlogout'=> $row->Lastlogout
                     );
                         $this->session->set_userdata($newdata); 
                  return TRUE;    
                 }
                 return FALSE;
     }//end function
+
+    public function changePassword($new_password)
+    {   
+        //data for where statement
+        $where_data = array(
+            'id' => $this->session->id,
+            'email' => $this->session->email
+        );
+        //data for update statement
+        $update_data = array(
+            'password' => $new_password
+        );
+        // Build the query
+        $this->db->where($where_data);
+        $this->db->update('Profile', $update_data);
+        // check to see if the above was successful, if so return true
+        if($this->db->affected_rows() != '0') {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
 }//end class

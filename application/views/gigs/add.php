@@ -18,7 +18,6 @@
 
 ?>
 
-
 <?php $this->load->view($this->config->item('theme') . 'headerjqueryui'); ?>
 
 <div class="container">
