@@ -19,7 +19,7 @@ $this->load->view($this->config->item('theme').'header');
 $attributes = array('class'=>'form-horizontal', 'role'=>'form');
 ?>
 
-<h1>Please note, if you do not login or create an account before posting a veue, you will be unable to make changes to or delete it after it has been posted</h1>
+<h1>Please note, if you do not login or create an account before posting a gig, you will be unable to make changes to or delete it after it has been posted</h1>
 
 <div class="container">
   <div class="col-lg-10">
