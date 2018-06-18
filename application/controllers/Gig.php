@@ -71,13 +71,33 @@ class Gig extends CI_Controller
         
         $this->load->view('gigs/view', $data);
     }#end function view
+    public function add()
+    {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->form_validation->set_message('check_dropdown', 'You need to select an employment type.');
+        $data['title'] = 'Add a new gig';
+        
+        if ($this->form_validation->run() == FALSE)
+        {//create form to add gigs
+            $this->load->view('gigs/add', $data); 
+        }
+        else
+        {//this processes
+            $data['gigs'] = $this->gig_model->getGigs();
+            $data['title']= 'Gigs';
+            $data['success'] = 'created';
+            $this->gig_model->addGig();
+            $this->load->view('gigs/success', $data);
+
+        }
+    }#end function add()
     public function edit(){
 
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->form_validation->set_message('check_dropdown', 'You need to select an employment type.');
         $data['title'] = 'Edit Gigs';
-
         $userId = $this->gig_model->get_session_id();
         $id = $this->gig_model->get_session_id();
         $companyId = $this->gig_model->find_id_in_table('CompanyID', 'Gigs', 'id', $id); 
@@ -135,7 +155,7 @@ class Gig extends CI_Controller
                     if ($data['gigs'] = $this->gig_model->editGigs($companyId, $data, $companyContactId, $data3, $userId, $data2) == TRUE)
                     {
                         $data['title']= 'Gigs';
-                        $data['success'] = 'updated';
+                        $data['success'] = 'Gig Succesfully Updated';
                         $this->load->view('gigs/success', $data);
                     }
                 }
@@ -156,33 +176,12 @@ class Gig extends CI_Controller
         $id = $this->uri->segment(3);
         $data['title'] = 'Delete a Gig';
 
-        if($this->gig_model->deleteGig($id)){       $this->load->view('gigs/delete', $data);
+        if($this->gig_model->deleteGig($id)){       
+            $this->load->view('gigs/delete', $data);
         }
         
     }#end function delete()
         
-    public function add()
-    {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->form_validation->set_message('check_dropdown', 'You need to select an employment type.');
-        $data['title'] = 'Add a new gig';
-        
-        if ($this->form_validation->run() == FALSE)
-        {//create form to add gigs
-            $this->load->view('gigs/add', $data); 
-        }
-        else
-        {//this processes
-            $data['gigs'] = $this->gig_model->getGigs();
-            $data['title']= 'Gigs';
-            $data['success'] = 'created';
-            $this->gig_model->addGig();
-            $this->load->view('gigs/success', $data);
-
-        }
-    }#end function add()
-    
     public function search()
     {
         $keyword = $this->input->post('keyword');
@@ -194,6 +193,20 @@ class Gig extends CI_Controller
     public function check_dropdown($post_dropdown){
         return $post_dropdown == '0' ? FALSE : TRUE;
     }
+    public function find_post_id($userId)
+    {    
+        $postExist = false;
+        $query = $this->db->query("SELECT id FROM Venue");
+        foreach ($query->result_array() as $row)
+                 {
+                    if($row['id'] == $userId)
+                        {
+                        $postExist = true;
+                        }
+                 }
+         return $postExist;           
+    }#end of find_post_id
+
 
 
 }#end Gigs class/controller

@@ -50,6 +50,12 @@ $this->load->view($this->config->item('theme').'header');
     <br/>
     <p><b>Venue Post Date: </b><?php echo $venue['VenuePostDate']; ?></p>
     <p><b>Venue Expiration Date: </b><?php echo $venue['VenueExpirationDate']; ?></p>
+    
+    
+    <li><a class="btn btn-warning" href="<?php echo site_url("venues/edit-list/".$venue["VenueKey"])?>">Edit</a></li>
+    <br>
+    <li><a class="btn btn-warning " href="<?php echo site_url("venues/delete/".$venue["VenueKey"])?>">Delete</a></li>
+    
     <p><?php echo anchor('venues/', 'Back to Venue List'); ?></p>
 </div>
 

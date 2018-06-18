@@ -34,8 +34,15 @@ class Gig_model extends CI_Model {
     {
             $this->load->database();
     }#end constructor
-
-       
+    public function get_session_id()
+        {//find userId in the session and return the value      
+            foreach ($_SESSION as $session) {
+                    if ($session == "id")
+                    {
+                         return $_SESSION["id"];               
+                    }      
+                }       
+     }#end of get_session_id     
      /**
      * Retreive a list of available gigs from the DB.
      *
@@ -77,8 +84,6 @@ class Gig_model extends CI_Model {
         //$query = $this->db->like('GigOutline', $slug);
         return $query->row_array();
     }#end getGigs()
-    
-
 
     /**
      * Add a new gig to the DB using POST parameters.
@@ -215,20 +220,7 @@ class Gig_model extends CI_Model {
         //delete from the Gigs table
         $this->db->delete('Gigs');
         return $this->db->affected_rows();
-    }
-    public function get_session_id()
-    {//find userId in the session and return the value      
-        foreach ($_SESSION as $session) {
-                if ($session == "id")
-                {
-                     return $_SESSION["id"];               
-                }      
-            }       
-    }#end of get_session_id     
-    public function list_all_posts(){
-        //        $this->db->
-    }#end of list_all_posts
-    
+    }    
     public function find_post_id($userId)
     {    
         $postExist = false;

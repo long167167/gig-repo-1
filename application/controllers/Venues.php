@@ -23,7 +23,6 @@
 
 
 class Venues extends CI_Controller {
-
        /**
         * Constructor Loads default data into object
         *
@@ -66,6 +65,7 @@ class Venues extends CI_Controller {
      */
      public function view($slug = NULL)
 	   {
+            $data['userId'] = $this->gig_model->get_session_id();
 			$data['venue'] = $this->Venues_model->getVenues($slug);
 
 			if (empty($data['venue']))
@@ -73,10 +73,9 @@ class Venues extends CI_Controller {
 					show_404();
 			}
 
-			$data['title'] = $data['venue']['VenueName'];
+			$data['title'] = 'Venue';
 			$this->load->view('venues/view', $data);
 	   }//end view()
-
 
     /**
      * Shows for through the add.php page
@@ -104,7 +103,6 @@ class Venues extends CI_Controller {
             $this->load->view('venues/success', $data);
         }
     }//end add()
-
     /**
      * allows you to edit an existing venue
      *
@@ -116,33 +114,66 @@ class Venues extends CI_Controller {
     {
       $this->load->helper('form');
       $this->load->library('form_validation');
-
-      if ($this->form_validation->run() == FALSE)
-      {
-        if(is_null($slug))
-        {
-          $data['venues'] = $this->Venues_model->getVenues();
-          $data['title'] = 'Edit Venues';
-          $this->load->view('venues/edit-list', $data);
-        }
-        else
-        {
-          $data['venue'] = $this->Venues_model->getVenues($slug);
-          if (empty($data['venue']))
+      $data['title'] = 'Edit Venues';
+      $userId = $this->Venues_model->get_session_id();
+      $id = $this->Venues_model->get_session_id();
+        
+      if ($this->session->logged_in == TRUE)
+        {//if logged get data of the veues(s) that matches userId from db
+            if ($this->Venues_model->find_post_id($userId) == TRUE)
           {
-              show_404();
+            if(is_null($slug))
+            {
+              $data['venues'] = $this->Venues_model->getVenues();
+              $data['title'] = 'Edit Venues';
+              $this->load->view('venues/edit-list', $data);
+            }
+            else
+            {
+              $data['venue'] = $this->Venues_model->getVenues($slug);
+              if (empty($data['venue']))
+              {
+                  show_404();
+              }
+              $this->load->helper('date');
+              $data['title'] = 'Venue';
+              $this->load->view('venues/edit-view', $data);
+            }
           }
-          $this->load->helper('date');
-          $data['title'] = 'Edit ' . $data['venue']['VenueName'];
-          $this->load->view('venues/edit-view', $data);
-        }
-      }
-      else
-      {
-        $this->Venues_model->editVenues($slug);
-        $data['title'] = 'Venue Successfully Edited';
-        $this->load->view('venues/edit-success', $data);
+          else
+          {
+            $this->Venues_model->editVenues($slug);
+            $data['title'] = 'Venue Successfully Updated';
+            $this->load->view('venues/edit-success', $data);
+          }
       }
     }//end edit()
+    
+    public function delete($key)
+    {
+        $userId = $this->Venues_model->get_session_id();
+        
+        $id = $this->uri->segment(3);
+        $data['title'] = 'Delete a Venue';
+
+        if($this->Venues_model->deleteVenue($key)){       
+            $this->load->view('venues/delete', $data);
+        }
+        
+    }#end function delete()
+        
+    public function find_post_id($userId)
+    {    
+        $postExist = false;
+        $query = $this->db->query("SELECT id FROM Venue");
+        foreach ($query->result_array() as $row)
+                 {
+                    if($row['id'] == $userId)
+                        {
+                        $postExist = true;
+                        }
+                 }
+         return $postExist;           
+    }#end of find_post_id
 
 }//END Venues

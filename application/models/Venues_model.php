@@ -29,14 +29,9 @@ class Venues_model extends CI_Model {
      * @todo none
      */
       public function __construct()
-
-      {
-        $this->load->database();
-
-      }//end constructor
-
-
-
+    {
+          $this->load->database();
+    }#end constructor
 
     /**
      * getVenues method retrieves added venues from database
@@ -46,10 +41,18 @@ class Venues_model extends CI_Model {
      * @return void
      * @todo none
      */
+    public function get_session_id()
+    {//find userId in the session and return the value      
+        foreach ($_SESSION as $session) {
+                if ($session == "id")
+                {
+                     return $_SESSION["id"];               
+                }      
+            }       
+    }#end of get_session_id     
+    
     public function getVenues($slug = FALSE)
     {
-
-
 
         if ($slug === FALSE)
         {
@@ -71,8 +74,6 @@ class Venues_model extends CI_Model {
         return $query->row_array();
 
     }//end getVenues method
-
-
     /**
      * addVenues loads CI base helper('url')
      *
@@ -86,7 +87,14 @@ class Venues_model extends CI_Model {
          $this->load->helper('url');
 
          $now = date('Y-m-d H:i:s');
-
+        
+         // checks for the User Id in the session variable
+         if (isset($_SESSION['id'])) {
+             $user_id = $_SESSION['id'];
+         } else {
+             $user_id = 0;
+         }
+        
          $data = array(
             'VenueName' => $this->input->post('VenueName'),
             'VenueTypeKey' => $this->input->post('VenueTypeKey'),
@@ -105,7 +113,8 @@ class Venues_model extends CI_Model {
             'Wheelchair' => $this->input->post('Wheelchair'),
             'Parking' => $this->input->post('Parking'),
             'VenuePostDate' =>$now,
-            'VenueExpirationDate' => $this->input->post('VenueExpirationDate')
+            'VenueExpirationDate' => $this->input->post('VenueExpirationDate'),
+            'id' => $user_id
 
          );
 
@@ -158,4 +167,12 @@ class Venues_model extends CI_Model {
       $this->db->update('Venue', $data);
 
     }//end editVenues
+    public function deleteVenue($key)
+    {
+        //get the key of the venue from the database
+        $this->db->where('VenueKey', $key);
+        //delete from the Venue table
+        $this->db->delete('Venue');
+        return $this->db->affected_rows();
+    }
 }//end class
