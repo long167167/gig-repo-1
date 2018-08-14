@@ -17,6 +17,12 @@ body{
     padding-top: 80px !important;
 }
 
+.photo-banner img {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
 #gigs {
     margin-top:100px;
 }
