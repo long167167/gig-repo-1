@@ -13,6 +13,10 @@
  */
 $this->load->view($this->config->item('theme') . 'header');
 ?>
+
+<div class="photo-banner col-lg-12">
+<img src="img/home-banner.jpg" alt="home page banner">
+</div>
  
 <div class="row">
     <div class="box col " style="background-color: red"> </div>
