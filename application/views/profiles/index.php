@@ -9,6 +9,10 @@ $this->load->view($this->config->item('theme') . 'header');
   <li class="active">Profiles</li>
 </ul>
 
+<div class="photo-banner col-lg-12">
+<img src="img/profile-banner.jpg" alt="profile page banner">
+</div>
+
 <h2><?php echo $title ?></h2>
 <?php foreach ($profiles as $profile): ?>
 <div class="col-sm-12 col-md-6 col-lg-4">
