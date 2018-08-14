@@ -26,6 +26,9 @@ $this->load->view($this->config->item('theme').'header');
   <li class="active">Venues</li>
 </ul>
 
+<div class="photo-banner col-lg-12">
+<img src="img/venue-banner.jpg" alt="venue page banner">
+</div>
 
 
 <h2><?php echo $title ?></h2>
