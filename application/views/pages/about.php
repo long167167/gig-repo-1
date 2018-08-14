@@ -1,5 +1,9 @@
 <?php $this->load->view($this->config->item('theme').'header'); ?>
 
+<div class="photo-banner col-lg-12">
+<img src="img/about-banner.jpg" alt="about page banner">
+</div>
+
 <div class="container">
     <div class="row col-xs-12 col-md-8">
 <h1>About Us</h1>
