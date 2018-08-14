@@ -3,7 +3,7 @@ $this->load->view($this->config->item('theme').'header');
 ?>
 
 <div class="photo-banner col-lg-12">
-<img src="img/qa-banner.jpg" alt="questions page banner">
+<img src="../img/qa-banner.jpg" alt="questions page banner">
 </div>
 
 <h1>Gig FAQ</h1>
