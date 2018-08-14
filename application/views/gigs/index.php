@@ -18,11 +18,14 @@
 
 <?php $this->load->view($this->config->item('theme') . 'header'); ?>
 
-
 <ul class="breadcrumb">
   <li><a href="<?=base_url()?>">Home</a></li>
   <li class="active">Gigs</li>
 </ul>
+
+<div class="photo-banner col-lg-12">
+<img src="img/gig-banner.jpg" alt="gig page banner">
+</div>
 
 
 <h2>Gigs List</h2>
