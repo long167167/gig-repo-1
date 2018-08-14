@@ -17,6 +17,11 @@
 //$this->load->view('themes/bootswatch/header');
 $this->load->view($this->config->item('theme') . 'header');
 ?>
+
+<div class="photo-banner col-lg-12">
+<img src="img/contact-banner.jpg" alt="contact page banner">
+</div>
+
   <div class="container ">
     <div class="col-lg-4 col-lg-offset-4 well">
       <?php echo validation_errors(); ?>
